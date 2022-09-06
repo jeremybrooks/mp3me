@@ -1,0 +1,17 @@
+log/*.log
+*.log
+*.iml
+tmp/*
+tmp/**/*
+*.swp
+*~
+.DS_Store
+VERSION*
+api*
+build
+dist
+deploy
+web
+nbproject/private/profiler/*.hprof
+src/main/resources/net/jeremybrooks/suprsetr/private.properties
+

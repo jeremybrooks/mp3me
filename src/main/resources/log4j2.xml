@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Appenders>
+        <RollingFile name="FILE"
+                     fileName="${sys:user.home}/.mp3me/mp3me.log"
+                     filePattern="convert-%i.log">
+            <PatternLayout pattern="%d %p %c: %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="FILE" />
+        </Root>
+    </Loggers>
+</Configuration>

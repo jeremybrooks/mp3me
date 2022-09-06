@@ -1,0 +1,321 @@
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "17.0.3" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundleName": "settings"
+	"i18n.keyPrefix": "SettingsDialog"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"title": "Settings"
+			"modal": true
+			"defaultCloseOperation": 0
+			"$sizePolicy": 1
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "0, 0"
+					"$rowSpecs": "0, 0, 0, 0, 0, 0, 0"
+					"$hGap": 5
+					"$vGap": 5
+					"$alignLeft": true
+					"$alignTop": true
+				} ) {
+					name: "contentPanel"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": new FormMessage( null, "SettingsDialog.label1.text" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "txtFfmpegBinary"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"weightx": 1.0
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+						"alignment": 2
+					} ) {
+						name: "panel1"
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "btnBrowse"
+							"text": new FormMessage( null, "SettingsDialog.btnBrowse.text" )
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnBrowse", false ) )
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label10"
+						"text": new FormMessage( null, "SettingsDialog.label10.text" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 2
+						"insets": new java.awt.Insets( 3, 3, 3, 3 )
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "txtDestination"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 2
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+						"alignment": 2
+					} ) {
+						name: "panel3"
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "btnBrowseDestination"
+							"text": new FormMessage( null, "SettingsDialog.btnBrowseDestination.text" )
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnBrowseDestination", false ) )
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 3
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": new FormMessage( null, "SettingsDialog.label2.text" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 4
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "cmbBitrate"
+						"model": new javax.swing.DefaultComboBoxModel {
+							selectedItem: "256k"
+							addElement( "256k" )
+							addElement( "192k" )
+							addElement( "160k" )
+							addElement( "128k" )
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 4
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+						"$columnSpecs": "0, 0"
+						"$rowSpecs": "0, 0, 0, 0, 0, 0, 0, 0, 0, 0"
+						"$hGap": 5
+						"$vGap": 5
+						"$alignLeft": true
+						"$alignTop": true
+					} ) {
+						name: "panel2"
+						"border": new javax.swing.border.TitledBorder( "i18nKey=SettingsDialog.panel2.border" )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label11"
+							"text": new FormMessage( null, "SettingsDialog.label11.text" )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"insets": new java.awt.Insets( 3, 3, 3, 3 )
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "cmbAiff"
+							"model": new javax.swing.DefaultComboBoxModel {
+								selectedItem: "Convert"
+								addElement( "Convert" )
+								addElement( "Copy" )
+								addElement( "Ignore" )
+							}
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridx": 1
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label12"
+							"text": new FormMessage( null, "SettingsDialog.label12.text" )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridy": 1
+							"insets": new java.awt.Insets( 3, 3, 3, 3 )
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "cmbFlac"
+							"model": new javax.swing.DefaultComboBoxModel {
+								selectedItem: "Convert"
+								addElement( "Convert" )
+								addElement( "Copy" )
+								addElement( "Ignore" )
+							}
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridx": 1
+							"gridy": 1
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label3"
+							"text": new FormMessage( null, "SettingsDialog.label3.text" )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"insets": new java.awt.Insets( 3, 3, 3, 3 )
+							"gridy": 2
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "cmbM4a"
+							"model": &DefaultComboBoxModel0 new javax.swing.DefaultComboBoxModel {
+								selectedItem: "Convert"
+								addElement( "Convert" )
+								addElement( "Copy" )
+								addElement( "Ignore" )
+							}
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridx": 1
+							"weightx": 1.0
+							"gridy": 2
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label4"
+							"text": new FormMessage( null, "SettingsDialog.label4.text" )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridy": 3
+							"insets": new java.awt.Insets( 3, 3, 3, 3 )
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "cmbM4v"
+							"model": #DefaultComboBoxModel0
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"weightx": 1.0
+							"gridy": 3
+							"gridx": 1
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label5"
+							"text": new FormMessage( null, "SettingsDialog.label5.text" )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridy": 4
+							"insets": new java.awt.Insets( 3, 3, 3, 3 )
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "cmbMp3"
+							"model": #DefaultComboBoxModel0
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"weightx": 1.0
+							"gridy": 4
+							"gridx": 1
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label6"
+							"text": new FormMessage( null, "SettingsDialog.label6.text" )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridy": 5
+							"insets": new java.awt.Insets( 3, 3, 3, 3 )
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "cmbMp4"
+							"model": #DefaultComboBoxModel0
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"weightx": 1.0
+							"gridy": 5
+							"gridx": 1
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label13"
+							"text": new FormMessage( null, "SettingsDialog.label13.text" )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridy": 6
+							"insets": new java.awt.Insets( 3, 3, 3, 3 )
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "cmbOgg"
+							"model": new javax.swing.DefaultComboBoxModel {
+								selectedItem: "Convert"
+								addElement( "Convert" )
+								addElement( "Copy" )
+								addElement( "Ignore" )
+							}
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridx": 1
+							"gridy": 6
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label7"
+							"text": new FormMessage( null, "SettingsDialog.label7.text" )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridy": 7
+							"insets": new java.awt.Insets( 3, 3, 3, 3 )
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "cmbPdf"
+							"model": new javax.swing.DefaultComboBoxModel {
+								selectedItem: "Copy"
+								addElement( "Copy" )
+								addElement( "Ignore" )
+							}
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"weightx": 1.0
+							"gridy": 7
+							"gridx": 1
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label8"
+							"text": new FormMessage( null, "SettingsDialog.label8.text" )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridy": 8
+							"insets": new java.awt.Insets( 3, 3, 3, 3 )
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "cmbWav"
+							"model": #DefaultComboBoxModel0
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"weightx": 1.0
+							"gridy": 8
+							"gridx": 1
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label9"
+							"text": new FormMessage( null, "SettingsDialog.label9.text" )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridy": 9
+							"insets": new java.awt.Insets( 3, 3, 3, 3 )
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "cmbOther"
+							"model": new javax.swing.DefaultComboBoxModel {
+								selectedItem: "Copy"
+								addElement( "Copy" )
+								addElement( "Ignore" )
+							}
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"weightx": 1.0
+							"gridy": 9
+							"gridx": 1
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 5
+						"gridwidth": 2
+						"insets": new java.awt.Insets( 3, 3, 3, 3 )
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "0:1.0, 80, 80"
+					"$rowSpecs": "0"
+					"$hGap": 5
+					"$vGap": 5
+				} ) {
+					name: "buttonBar"
+					"border": new javax.swing.border.EmptyBorder( 12, 0, 0, 0 )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "okButton"
+						"text": new FormMessage( null, "SettingsDialog.okButton.text" )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "ok", false ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 0
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "cancelButton"
+						"text": new FormMessage( null, "SettingsDialog.cancelButton.text" )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancel", false ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 2
+						"gridy": 0
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "South"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 600, 615 )
+		} )
+	}
+}

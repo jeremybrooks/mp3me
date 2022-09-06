@@ -1,0 +1,112 @@
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "17.0.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.GridBagLayout ) {
+			"$columnSpecs": "0, 0"
+			"$rowSpecs": "0, 0, 0"
+			"$hGap": 5
+			"$vGap": 5
+			"$alignLeft": true
+			"$alignTop": true
+		} ) {
+			name: "this"
+			"$sizePolicy": 2
+			addEvent( new FormEvent( "java.awt.event.ComponentListener", "componentResized", "thisComponentResized", false ) )
+			addEvent( new FormEvent( "java.awt.event.ComponentListener", "componentMoved", "thisComponentMoved", false ) )
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "thisWindowClosing", false ) )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Conversion Jobs"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"hAlign": 4
+				"vAlign": 1
+				"insets": new java.awt.Insets( 3, 3, 3, 3 )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "list1"
+					"selectionMode": 0
+					auxiliary() {
+						"JavaCodeGenerator.typeParameters": "ConversionJob"
+					}
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 1
+				"weighty": 1.0
+				"insets": new java.awt.Insets( 5, 3, 5, 3 )
+				"weightx": 1.0
+			} )
+			add( new FormComponent( "javax.swing.JCheckBox" ) {
+				name: "cbxLimit"
+				"text": "Limit By Time"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cbxLimit", false ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 1
+				"insets": new java.awt.Insets( 3, 3, 3, 3 )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txtLimit"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 1
+				"gridy": 1
+				"insets": new java.awt.Insets( 0, 0, 0, 3 )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+				"alignment": 2
+			} ) {
+				name: "panel3"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "btnGo"
+					"text": "Convert"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnGo", false ) )
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 1
+				"gridy": 2
+			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "mnuFile"
+					"text": "File"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "mnuSettings"
+						"text": "Preferences"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mnuSettings", false ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "mnuQuit"
+						"text": "Quit"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mnuQuit", false ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "mnuJobs"
+					"text": "Jobs"
+					addEvent( new FormEvent( "javax.swing.event.MenuListener", "menuSelected", "mnuJobsMenuSelected", false ) )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "mnuAddJob"
+						"text": "Add Job..."
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mnuAddJob", false ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "mnuDeleteJob"
+						"text": "Delete Selected Job"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mnuDeleteJob", false ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "mnuClear"
+						"text": "Delete All Jobs"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mnuClear", false ) )
+					} )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 685, 335 )
+		} )
+	}
+}
