@@ -4,8 +4,6 @@ import java.util.Map;
 
 public class Settings {
     private String destination = "";
-    private boolean limit;
-    private String limitDateTime = "";
 
     private int windowWidth = 650;
     private int windowHeight = 350;
@@ -33,22 +31,6 @@ public class Settings {
 
     public void setDestination(String destination) {
         this.destination = destination;
-    }
-
-    public boolean isLimit() {
-        return limit;
-    }
-
-    public void setLimit(boolean limit) {
-        this.limit = limit;
-    }
-
-    public String getLimitDateTime() {
-        return limitDateTime;
-    }
-
-    public void setLimitDateTime(String limitDateTime) {
-        this.limitDateTime = limitDateTime;
     }
 
     public int getWindowWidth() {

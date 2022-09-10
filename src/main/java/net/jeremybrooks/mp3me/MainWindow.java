@@ -56,7 +56,6 @@ public class MainWindow extends JFrame {
         list1.setModel(listModel);
         list1.setCellRenderer(new ConversionJobListRenderer());
         new FileDrop(scrollPane1, this::addDirectoriesToList);
-        updateFields();
         Settings settings = App.getSettings();
         setSize(settings.getWindowWidth(), settings.getWindowHeight());
         setLocation(settings.getWindowPositionX(), settings.getWindowPositionY());
@@ -83,22 +82,7 @@ public class MainWindow extends JFrame {
         if (result == JFileChooser.APPROVE_OPTION) {
             settings.setDestination(jfc.getSelectedFile().getAbsolutePath());
             App.saveSettings(settings);
-            updateFields();
         }
-    }
-
-    private void updateFields() {
-        Settings settings = App.getSettings();
-        txtLimit.setText(settings.getLimitDateTime());
-        cbxLimit.setSelected(settings.isLimit());
-        txtLimit.setEnabled(settings.isLimit());
-    }
-
-    private void cbxLimit() {
-        Settings settings = App.getSettings();
-        settings.setLimit(cbxLimit.isSelected());
-        App.saveSettings(settings);
-        updateFields();
     }
 
     private void btnClear() {
@@ -136,7 +120,6 @@ public class MainWindow extends JFrame {
                     }
                     listModel.add(listModel.size(), job);
                 });
-        updateFields();
     }
 
 
@@ -231,12 +214,11 @@ public class MainWindow extends JFrame {
         label1 = new JLabel();
         scrollPane1 = new JScrollPane();
         list1 = new JList<>();
-        cbxLimit = new JCheckBox();
-        txtLimit = new JTextField();
         panel3 = new JPanel();
         btnGo = new JButton();
 
         //======== this ========
+        setIconImage(new ImageIcon(getClass().getResource("/icons/mp3me_icon-256.png")).getImage());
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentMoved(ComponentEvent e) {
@@ -256,9 +238,9 @@ public class MainWindow extends JFrame {
         var contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
         ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {0, 0, 0};
-        ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {0, 0, 0, 0};
+        ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {0, 0, 0};
         ((GridBagLayout)contentPane.getLayout()).columnWeights = new double[] {0.0, 0.0, 1.0E-4};
-        ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 1.0E-4};
+        ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};
 
         //======== menuBar1 ========
         {
@@ -329,16 +311,6 @@ public class MainWindow extends JFrame {
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(5, 3, 10, 3), 0, 0));
 
-        //---- cbxLimit ----
-        cbxLimit.setText("Limit By Time");
-        cbxLimit.addActionListener(e -> cbxLimit());
-        contentPane.add(cbxLimit, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(3, 3, 8, 8), 0, 0));
-        contentPane.add(txtLimit, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 5, 3), 0, 0));
-
         //======== panel3 ========
         {
             panel3.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -348,7 +320,7 @@ public class MainWindow extends JFrame {
             btnGo.addActionListener(e -> btnGo());
             panel3.add(btnGo);
         }
-        contentPane.add(panel3, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+        contentPane.add(panel3, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
         setLocationRelativeTo(getOwner());
@@ -367,8 +339,6 @@ public class MainWindow extends JFrame {
     private JLabel label1;
     private JScrollPane scrollPane1;
     private JList<ConversionJob> list1;
-    private JCheckBox cbxLimit;
-    private JTextField txtLimit;
     private JPanel panel3;
     private JButton btnGo;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
