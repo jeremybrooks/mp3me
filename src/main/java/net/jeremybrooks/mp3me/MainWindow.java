@@ -70,19 +70,6 @@ public class MainWindow extends JFrame {
         return mainWindow;
     }
 
-    private void btnBrowse() {
-        JFileChooser jfc = new JFileChooser();
-        jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        jfc.setMultiSelectionEnabled(false);
-        jfc.setDialogTitle("Choose a destination directory");
-        int result = jfc.showOpenDialog(this);
-        Settings settings = App.getSettings();
-        if (result == JFileChooser.APPROVE_OPTION) {
-            settings.setDestination(jfc.getSelectedFile().getAbsolutePath());
-            App.saveSettings(settings);
-        }
-    }
-
     private void showDirectorySelectionDialog() {
         JFileChooser jfc = new JFileChooser();
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
