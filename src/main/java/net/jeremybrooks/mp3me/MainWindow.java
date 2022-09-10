@@ -4,6 +4,7 @@
 
 package net.jeremybrooks.mp3me;
 
+import java.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -203,6 +204,7 @@ public class MainWindow extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        ResourceBundle bundle = ResourceBundle.getBundle("main");
         menuBar1 = new JMenuBar();
         mnuFile = new JMenu();
         mnuSettings = new JMenuItem();
@@ -247,15 +249,15 @@ public class MainWindow extends JFrame {
 
             //======== mnuFile ========
             {
-                mnuFile.setText("File");
+                mnuFile.setText(bundle.getString("MainWindow.mnuFile.text"));
 
                 //---- mnuSettings ----
-                mnuSettings.setText("Preferences");
+                mnuSettings.setText(bundle.getString("MainWindow.mnuSettings.text"));
                 mnuSettings.addActionListener(e -> mnuSettings());
                 mnuFile.add(mnuSettings);
 
                 //---- mnuQuit ----
-                mnuQuit.setText("Quit");
+                mnuQuit.setText(bundle.getString("MainWindow.mnuQuit.text"));
                 mnuQuit.addActionListener(e -> mnuQuit());
                 mnuFile.add(mnuQuit);
             }
@@ -263,7 +265,7 @@ public class MainWindow extends JFrame {
 
             //======== mnuJobs ========
             {
-                mnuJobs.setText("Jobs");
+                mnuJobs.setText(bundle.getString("MainWindow.mnuJobs.text"));
                 mnuJobs.addMenuListener(new MenuListener() {
                     @Override
                     public void menuCanceled(MenuEvent e) {}
@@ -276,17 +278,17 @@ public class MainWindow extends JFrame {
                 });
 
                 //---- mnuAddJob ----
-                mnuAddJob.setText("Add Job...");
+                mnuAddJob.setText(bundle.getString("MainWindow.mnuAddJob.text"));
                 mnuAddJob.addActionListener(e -> mnuAddJob());
                 mnuJobs.add(mnuAddJob);
 
                 //---- mnuDeleteJob ----
-                mnuDeleteJob.setText("Delete Selected Job");
+                mnuDeleteJob.setText(bundle.getString("MainWindow.mnuDeleteJob.text"));
                 mnuDeleteJob.addActionListener(e -> mnuDeleteJob());
                 mnuJobs.add(mnuDeleteJob);
 
                 //---- mnuClear ----
-                mnuClear.setText("Delete All Jobs");
+                mnuClear.setText(bundle.getString("MainWindow.mnuClear.text"));
                 mnuClear.addActionListener(e -> mnuClear());
                 mnuJobs.add(mnuClear);
             }
@@ -295,7 +297,7 @@ public class MainWindow extends JFrame {
         setJMenuBar(menuBar1);
 
         //---- label1 ----
-        label1.setText("Conversion Jobs");
+        label1.setText(bundle.getString("MainWindow.label1.text"));
         contentPane.add(label1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
             GridBagConstraints.NORTHEAST, GridBagConstraints.NONE,
             new Insets(3, 3, 8, 8), 0, 0));
@@ -316,7 +318,7 @@ public class MainWindow extends JFrame {
             panel3.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
             //---- btnGo ----
-            btnGo.setText("Convert");
+            btnGo.setText(bundle.getString("MainWindow.btnGo.text"));
             btnGo.addActionListener(e -> btnGo());
             panel3.add(btnGo);
         }
