@@ -17,10 +17,17 @@ new FormModel {
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 					name: "tabbedPane1"
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
-						name: "contentPanel"
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane2"
+						add( new FormComponent( "javax.swing.JTextArea" ) {
+							name: "textArea2"
+							"editable": false
+							"text": "A utility to convert audio files to mp3.\n\nTo use mp3me, you must have ffmpeg installed. By default, mp3me will look for ffmpeg at /usr/bin/ffmpeg. If you have it installed in a different location, open the Preferences dialog and set the correct location.\n\nCoding: Jeremy Brooks\nSource Code: https://github.com/jeremybrooks/mp3me\nLibraries:\n    Log4j (https://logging.apache.org/log4j/2.x/)\n    pressplay (https://github.com/jeremybrooks/pressplay) \n\nInstaller built using Install4j (https://www.ej-technologies.com/products/install4j/overview.html)"
+							"wrapStyleWord": true
+							"lineWrap": true
+						} )
 					}, new FormLayoutConstraints( null ) {
-						"title": new FormMessage( null, "AboutDialog.contentPanel.tab.title" )
+						"title": new FormMessage( null, "AboutDialog.scrollPane2.tab.title" )
 					} )
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 						name: "scrollPane1"

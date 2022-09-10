@@ -37,7 +37,8 @@ public class AboutDialog extends JDialog {
         ResourceBundle bundle = ResourceBundle.getBundle("about");
         dialogPane = new JPanel();
         tabbedPane1 = new JTabbedPane();
-        contentPanel = new JPanel();
+        scrollPane2 = new JScrollPane();
+        textArea2 = new JTextArea();
         scrollPane1 = new JScrollPane();
         textArea1 = new JTextArea();
         buttonBar = new JPanel();
@@ -58,11 +59,17 @@ public class AboutDialog extends JDialog {
             //======== tabbedPane1 ========
             {
 
-                //======== contentPanel ========
+                //======== scrollPane2 ========
                 {
-                    contentPanel.setLayout(new FlowLayout());
+
+                    //---- textArea2 ----
+                    textArea2.setEditable(false);
+                    textArea2.setText("A utility to convert audio files to mp3.\n\nTo use mp3me, you must have ffmpeg installed. By default, mp3me will look for ffmpeg at /usr/bin/ffmpeg. If you have it installed in a different location, open the Preferences dialog and set the correct location.\n\nCoding: Jeremy Brooks\nSource Code: https://github.com/jeremybrooks/mp3me\nLibraries:\n    Log4j (https://logging.apache.org/log4j/2.x/)\n    pressplay (https://github.com/jeremybrooks/pressplay) \n\nInstaller built using Install4j (https://www.ej-technologies.com/products/install4j/overview.html)");
+                    textArea2.setWrapStyleWord(true);
+                    textArea2.setLineWrap(true);
+                    scrollPane2.setViewportView(textArea2);
                 }
-                tabbedPane1.addTab(bundle.getString("AboutDialog.contentPanel.tab.title"), contentPanel);
+                tabbedPane1.addTab(bundle.getString("AboutDialog.scrollPane2.tab.title"), scrollPane2);
 
                 //======== scrollPane1 ========
                 {
@@ -101,7 +108,8 @@ public class AboutDialog extends JDialog {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel dialogPane;
     private JTabbedPane tabbedPane1;
-    private JPanel contentPanel;
+    private JScrollPane scrollPane2;
+    private JTextArea textArea2;
     private JScrollPane scrollPane1;
     private JTextArea textArea1;
     private JPanel buttonBar;
