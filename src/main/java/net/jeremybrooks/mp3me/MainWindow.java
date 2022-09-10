@@ -4,14 +4,12 @@
 
 package net.jeremybrooks.mp3me;
 
-import java.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +20,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
@@ -41,6 +38,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * @author Jeremy Brooks
@@ -65,7 +63,6 @@ public class MainWindow extends JFrame {
         // on macOS, hide the Preferences, About, and Quit menus
         if (System.getProperty("os.name").toLowerCase().contains("mac")) {
             mnuFile.setVisible(false);
-            // todo hide about menu
         }
     }
 
@@ -84,17 +81,6 @@ public class MainWindow extends JFrame {
             settings.setDestination(jfc.getSelectedFile().getAbsolutePath());
             App.saveSettings(settings);
         }
-    }
-
-    private void btnClear() {
-        int index = list1.getSelectedIndex();
-        if (index != -1) {
-            listModel.remove(index);
-        }
-    }
-
-    private void btnAdd() {
-        showDirectorySelectionDialog();
     }
 
     private void showDirectorySelectionDialog() {

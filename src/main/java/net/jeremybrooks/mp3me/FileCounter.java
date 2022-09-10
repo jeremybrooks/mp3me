@@ -8,9 +8,9 @@ import java.nio.file.attribute.BasicFileAttributes;
 import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class FileCounter extends SimpleFileVisitor<Path> {
-    private ConversionJob job;
+    private final ConversionJob job;
     private int count;
-    private long cutoff;
+    private final long cutoff;
 
     public FileCounter(ConversionJob job, long cutoff) {
         this.job = job;
@@ -20,7 +20,7 @@ public class FileCounter extends SimpleFileVisitor<Path> {
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attributes) {
         if (attributes.isRegularFile() &&
-                (!file.getFileName().toString().startsWith(".")) &&
+                !file.getFileName().toString().startsWith(".") &&
                 attributes.creationTime().toMillis() < cutoff) {
 
             count++;

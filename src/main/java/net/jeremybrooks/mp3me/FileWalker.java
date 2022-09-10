@@ -41,7 +41,7 @@ public class FileWalker extends SimpleFileVisitor<Path> {
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attributes) {
         if (attributes.isRegularFile() &&
-                (!file.getFileName().toString().startsWith(".")) &&
+                !file.getFileName().toString().startsWith(".") &&
                 attributes.creationTime().toMillis() < cutoff) {
             String extension = FilenameUtils.getExtension(file.getFileName().toString()).toLowerCase();
             String action = settings.getFileTypeActionMap().get(extension);
@@ -140,7 +140,6 @@ public class FileWalker extends SimpleFileVisitor<Path> {
     private String buildUniqueFilename(MediaMetadata metadata) {
         String artistDirectory = getArtistDirectory(metadata);
         String albumDirectory = getAlbumDirectory(metadata);
-        int trackNumber = metadata.getTrackNumber();
         String title = getTitle(metadata);
         String mp3File = String.format("%s/%s/%s/%02d-%s.mp3",
                 settings.getDestination(),
