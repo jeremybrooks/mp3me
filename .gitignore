@@ -8,6 +8,7 @@ tmp/**/*
 *~
 .DS_Store
 api*
+target
 build
 dist
 deploy
