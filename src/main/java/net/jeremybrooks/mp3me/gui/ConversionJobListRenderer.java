@@ -2,7 +2,9 @@
  * Created by JFormDesigner on Wed Apr 27 19:18:03 PDT 2022
  */
 
-package net.jeremybrooks.mp3me;
+package net.jeremybrooks.mp3me.gui;
+
+import net.jeremybrooks.mp3me.model.ConversionJob;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -14,6 +16,7 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -33,6 +36,9 @@ public class ConversionJobListRenderer extends JPanel implements ListCellRendere
             new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/ClockW.png")),
             new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/ClockNW.png"))
     );
+    @Serial
+    private static final long serialVersionUID = 6610282806911852383L;
+
     public ConversionJobListRenderer() {
         initComponents();
     }
@@ -45,7 +51,8 @@ public class ConversionJobListRenderer extends JPanel implements ListCellRendere
             case PENDING -> {
                 lblPath.setText(value.getSourcePath().toString());
                 lblIcon.setIcon(ICON_PENDING);
-                lblCount.setText(String.format("%d files waiting", value.getFileCount()));
+                lblCount.setText(String.format("%d file%s waiting", value.getFileCount(),
+                        value.getFileCount() == 1 ? "" : "s"));
             }
             case ACTIVE -> {
                 lblPath.setText(value.getMessage());
@@ -59,7 +66,8 @@ public class ConversionJobListRenderer extends JPanel implements ListCellRendere
                     lblCount.setText("There were errors. Check the logs.");
                 } else {
                     lblIcon.setIcon(ICON_DONE);
-                    lblCount.setText(String.format("Converted %d files", value.getFileCount()));
+                    lblCount.setText(String.format("Converted %d file%s", value.getFileCount(),
+                            value.getFileCount() == 1 ? "" : "s"));
                 }
             }
         }

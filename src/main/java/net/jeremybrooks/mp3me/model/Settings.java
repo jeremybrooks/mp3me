@@ -1,4 +1,4 @@
-package net.jeremybrooks.mp3me;
+package net.jeremybrooks.mp3me.model;
 
 import java.util.Map;
 

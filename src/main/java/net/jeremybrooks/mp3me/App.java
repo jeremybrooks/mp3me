@@ -2,6 +2,8 @@ package net.jeremybrooks.mp3me;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.jeremybrooks.mp3me.gui.MainWindow;
+import net.jeremybrooks.mp3me.model.Settings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,6 +21,8 @@ public class App {
     private static final Path CONFIG_FILE = Paths.get(CONFIG_DIR.toString(), "config.json");
 
     private static final Logger logger = LogManager.getLogger();
+    public static String version;
+    public static final String appName = "mp3me";
 
     public static void main( String[] args ) throws Exception {
         if (System.getProperty("os.name").toLowerCase().contains("mac")) {
@@ -29,6 +33,12 @@ public class App {
                 Class.forName("net.jeremybrooks.mp3me.MacOSSetup").getDeclaredConstructor().newInstance();
             } catch (Exception e) {
                 logger.error("Could not find class.", e);
+            }
+            Package p = App.class.getPackage();
+            if (p != null && p.getImplementationVersion() != null) {
+                version = p.getImplementationVersion();
+            } else {
+                version = "0.0.0";
             }
         }
 

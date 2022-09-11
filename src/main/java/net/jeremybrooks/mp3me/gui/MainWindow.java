@@ -2,8 +2,14 @@
  * Created by JFormDesigner on Fri Apr 22 19:23:03 PDT 2022
  */
 
-package net.jeremybrooks.mp3me;
+package net.jeremybrooks.mp3me.gui;
 
+import net.jeremybrooks.mp3me.App;
+import net.jeremybrooks.mp3me.model.ConversionJob;
+import net.jeremybrooks.mp3me.ConversionWorker;
+import net.jeremybrooks.mp3me.FileCounter;
+import net.jeremybrooks.mp3me.FileDrop;
+import net.jeremybrooks.mp3me.model.Settings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,6 +38,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serial;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
@@ -43,10 +50,14 @@ import java.util.ResourceBundle;
  * @author Jeremy Brooks
  */
 public class MainWindow extends JFrame {
+    @Serial
+    private static final long serialVersionUID = 1474306364689452372L;
     private final DefaultListModel<ConversionJob> listModel = new DefaultListModel<>();
     private static final Logger logger = LogManager.getLogger();
     private boolean busy = false;
     private static MainWindow mainWindow;
+
+    private ConversionWorker conversionWorker;
 
     public MainWindow() {
         initComponents();
@@ -117,11 +128,12 @@ public class MainWindow extends JFrame {
         } else {
             buttonsEnabled(false);
             List<ConversionJob> list = Collections.list(listModel.elements());
-            new ConversionWorker(list, Long.MAX_VALUE, this).execute();
+            conversionWorker = new ConversionWorker(list, Long.MAX_VALUE, this);
+            conversionWorker.execute();
         }
     }
 
-    void updateJob(Integer index) {
+    public void updateJob(Integer index) {
         ConversionJob job = listModel.remove(index);
         listModel.add(index, job);
     }
@@ -158,6 +170,7 @@ public class MainWindow extends JFrame {
                     JOptionPane.QUESTION_MESSAGE);
         }
         if (exit == JOptionPane.YES_OPTION) {
+            conversionWorker.killRunningJob();
             if (quitResponse != null) {
                 quitResponse.performQuit();
             } else {
@@ -225,6 +238,7 @@ public class MainWindow extends JFrame {
         ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {0, 0, 0};
         ((GridBagLayout)contentPane.getLayout()).columnWeights = new double[] {0.0, 0.0, 1.0E-4};
         ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};
+        setTitle(String.format("%s - %s", App.appName, App.version));
 
         //======== menuBar1 ========
         {

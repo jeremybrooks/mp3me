@@ -1,5 +1,7 @@
 package net.jeremybrooks.mp3me;
 
+import net.jeremybrooks.mp3me.model.ConversionJob;
+import net.jeremybrooks.mp3me.model.Settings;
 import net.jeremybrooks.pressplay.FFProbe;
 import net.jeremybrooks.pressplay.MediaMetadata;
 import org.apache.commons.io.FilenameUtils;
@@ -29,6 +31,8 @@ public class FileWalker extends SimpleFileVisitor<Path> {
     private final int index;
 
     private final ConversionWorker conversionWorker;
+
+    private Process runningProcess;
 
     FileWalker(ConversionJob job, int index, long cutoff, ConversionWorker conversionWorker) {
         this.job = job;
@@ -77,8 +81,8 @@ public class FileWalker extends SimpleFileVisitor<Path> {
                                 "-codec:a", "libmp3lame",
                                 "-b:a", settings.getBitrate(),
                                 mp3File);
-                        Process process = processBuilder.inheritIO().start();
-                        int exitCode = process.waitFor();
+                        runningProcess = processBuilder.inheritIO().start();
+                        int exitCode = runningProcess.waitFor();
                         if (exitCode == 0) {
                             increment(extension);
                         } else {
@@ -101,6 +105,12 @@ public class FileWalker extends SimpleFileVisitor<Path> {
         return CONTINUE;
     }
 
+    void killRunningJob() {
+        if (runningProcess != null) {
+            logger.info("Killing running conversion job");
+            runningProcess.destroyForcibly();
+        }
+    }
 
     private void increment(String extension) {
         job.setFilesConverted(job.getFilesConverted() + 1);

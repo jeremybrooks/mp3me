@@ -14,7 +14,7 @@ new FormModel {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lblIcon"
-				"icon": new com.jformdesigner.model.SwingIcon( 0, "/ClockN.png" )
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/icons/ClockN.png" )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridheight": 2
 			} )

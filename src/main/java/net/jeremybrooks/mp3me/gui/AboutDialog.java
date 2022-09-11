@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Mon Sep 05 18:00:42 PDT 2022
  */
 
-package net.jeremybrooks.mp3me;
+package net.jeremybrooks.mp3me.gui;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -17,6 +17,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
+import java.io.Serial;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -26,6 +27,9 @@ import java.util.ResourceBundle;
  * @author Jeremy Brooks
  */
 public class AboutDialog extends JDialog {
+    @Serial
+    private static final long serialVersionUID = 1258023717493538397L;
+
     public AboutDialog(Window owner) {
         super(owner);
         initComponents();
@@ -83,7 +87,7 @@ public class AboutDialog extends JDialog {
 
                     //---- txtAbout ----
                     txtAbout.setEditable(false);
-                    txtAbout.setText("A utility to convert audio files to mp3.\n\nTo use mp3me, you must have ffmpeg installed. By default, mp3me will look for ffmpeg at /usr/bin/ffmpeg. If you have it installed in a different location, open the Preferences dialog and set the correct location.\n\nCoding: Jeremy Brooks\nSource Code: https://github.com/jeremybrooks/mp3me\nLibraries:\n    Log4j (https://logging.apache.org/log4j/2.x/)\n    pressplay (https://github.com/jeremybrooks/pressplay) \n\nInstaller built using Install4j (https://www.ej-technologies.com/products/install4j/overview.html)");
+                    txtAbout.setText("A utility to convert audio files to mp3. \n\nTo use mp3me, you must have ffmpeg installed. By default, mp3me will look for ffmpeg at /usr/local/bin/ffmpeg. If you have it installed in a different location, open the Preferences dialog and set the correct location. \n\nCoding: Jeremy Brooks\nSource Code: https://github.com/jeremybrooks/mp3me\nLibraries:\n    Log4j (https://logging.apache.org/log4j/2.x/)\n    pressplay (https://github.com/jeremybrooks/pressplay)\n\nInstaller built using Install4j (https://www.ej-technologies.com/products/install4j/overview.html)");
                     txtAbout.setWrapStyleWord(true);
                     txtAbout.setLineWrap(true);
                     scrollPane2.setViewportView(txtAbout);

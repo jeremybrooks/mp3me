@@ -1,5 +1,9 @@
 package net.jeremybrooks.mp3me;
 
+import net.jeremybrooks.mp3me.gui.AboutDialog;
+import net.jeremybrooks.mp3me.gui.MainWindow;
+import net.jeremybrooks.mp3me.gui.SettingsDialog;
+
 import java.awt.Desktop;
 
 public class MacOSSetup {

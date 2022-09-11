@@ -1,5 +1,7 @@
 package net.jeremybrooks.mp3me;
 
+import net.jeremybrooks.mp3me.model.ConversionJob;
+
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;

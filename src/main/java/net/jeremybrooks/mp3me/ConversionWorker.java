@@ -1,5 +1,7 @@
 package net.jeremybrooks.mp3me;
 
+import net.jeremybrooks.mp3me.gui.MainWindow;
+import net.jeremybrooks.mp3me.model.ConversionJob;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +18,7 @@ public class ConversionWorker extends SwingWorker<Void, Integer> {
     private final long cutoff;
     private final MainWindow mainWindow;
 
+    private FileWalker fileWalker;
 
     public ConversionWorker(List<ConversionJob> jobList, long cutoff, MainWindow mainWindow) {
         this.jobList = jobList;
@@ -36,7 +39,8 @@ public class ConversionWorker extends SwingWorker<Void, Integer> {
                 timer.scheduleAtFixedRate(new UpdateTask(job, i), 0, 200);
 
                 // this processes each of the files
-                Files.walkFileTree(job.getSourcePath(), new FileWalker(job, i, cutoff, this));
+                fileWalker = new FileWalker(job, i, cutoff, this);
+                Files.walkFileTree(job.getSourcePath(), fileWalker);
 
                 // job has completed
                 timer.cancel();
@@ -46,9 +50,13 @@ public class ConversionWorker extends SwingWorker<Void, Integer> {
             } catch (Exception e) {
                 logger.error("Error during conversion job", e);
             }
-            mainWindow.buttonsEnabled(true);
         }
+        mainWindow.buttonsEnabled(true);
         return null;
+    }
+
+    public void killRunningJob() {
+        fileWalker.killRunningJob();
     }
 
     /**

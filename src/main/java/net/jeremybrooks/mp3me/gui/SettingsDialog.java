@@ -2,7 +2,10 @@
  * Created by JFormDesigner on Fri Sep 02 22:17:37 PDT 2022
  */
 
-package net.jeremybrooks.mp3me;
+package net.jeremybrooks.mp3me.gui;
+
+import net.jeremybrooks.mp3me.App;
+import net.jeremybrooks.mp3me.model.Settings;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -22,6 +25,7 @@ import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.Serial;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,6 +36,8 @@ import java.util.ResourceBundle;
  */
 public class SettingsDialog extends JDialog {
 
+    @Serial
+    private static final long serialVersionUID = 7047110326808972160L;
     private final Settings settings;
 
     public SettingsDialog(Frame owner) {

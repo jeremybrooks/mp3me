@@ -16,6 +16,9 @@ new FormModel {
 			name: "this"
 			"$sizePolicy": 2
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/icons/mp3me_icon-256.png" )
+			auxiliary() {
+				"JavaCodeGenerator.postInitCode": "setTitle(String.format(\"%s - %s\", App.appName, App.version));"
+			}
 			addEvent( new FormEvent( "java.awt.event.ComponentListener", "componentResized", "thisComponentResized", false ) )
 			addEvent( new FormEvent( "java.awt.event.ComponentListener", "componentMoved", "thisComponentMoved", false ) )
 			add( new FormComponent( "javax.swing.JLabel" ) {
