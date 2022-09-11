@@ -43,7 +43,6 @@ import java.util.ResourceBundle;
  * @author Jeremy Brooks
  */
 public class MainWindow extends JFrame {
-//    private final Settings settings = App.getSettings();
     private final DefaultListModel<ConversionJob> listModel = new DefaultListModel<>();
     private static final Logger logger = LogManager.getLogger();
     private boolean busy = false;
