@@ -11,7 +11,7 @@
     </mountPoints>
     <entries>
       <dirEntry mountPoint="25" file="${project.basedir}/target/lib" />
-      <fileEntry mountPoint="25" file="${project.basedir}/target/{$project.artifactId}-{$project.version}.jar" />
+      <fileEntry mountPoint="25" file="${project.basedir}/target/${project.artifactId}-${project.version}.jar" />
     </entries>
   </files>
   <launchers>
@@ -23,10 +23,12 @@
         </classPath>
       </java>
       <iconImageFiles>
-        <file path="{$project.basedir}/src/main/resources/icons/mp3me_icon-16.png" />
-        <file path="{$project.basedir}/src/main/resources/icons/mp3me_icon-32.png" />
-        <file path="{$project.basedir}/src/main/resources/icons/mp3me_icon-48.png" />
-        <file path="{$project.basedir}/src/main/resources/icons/mp3me_icon-128.png" />
+        <file path="${project.basedir}/src/main/resources/icons/mp3me_icon-16.png" />
+        <file path="${project.basedir}/src/main/resources/icons/mp3me_icon-32.png" />
+        <file path="${project.basedir}/src/main/resources/icons/mp3me_icon-48.png" />
+        <file path="${project.basedir}/src/main/resources/icons/mp3me_icon-128.png" />
+        <file path="${project.basedir}/src/main/resources/icons/mp3me_icon-256.png" />
+        <file path="${project.basedir}/src/main/resources/icons/mp3me_icon-512.png" />
       </iconImageFiles>
     </launcher>
   </launchers>
