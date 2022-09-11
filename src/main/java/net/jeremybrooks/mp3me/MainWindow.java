@@ -27,10 +27,9 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.desktop.QuitResponse;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -47,7 +46,7 @@ public class MainWindow extends JFrame {
 //    private final Settings settings = App.getSettings();
     private final DefaultListModel<ConversionJob> listModel = new DefaultListModel<>();
     private static final Logger logger = LogManager.getLogger();
-
+    private boolean busy = false;
     private static MainWindow mainWindow;
 
     public MainWindow() {
@@ -103,6 +102,7 @@ public class MainWindow extends JFrame {
         Arrays.stream(mnuFile.getMenuComponents()).forEach(component -> component.setEnabled(enabled));
         mnuJobs.setEnabled(enabled);
         Arrays.stream(mnuJobs.getMenuComponents()).forEach(component -> component.setEnabled(enabled));
+        busy = !enabled;
     }
 
     private void btnGo() {
@@ -146,8 +146,29 @@ public class MainWindow extends JFrame {
     }
 
     private void mnuQuit() {
-        // todo don't quit if conversion is underway
-        System.exit(0);
+        confirmAndExit(null);
+    }
+
+    public void confirmAndExit(QuitResponse quitResponse) {
+        int exit = JOptionPane.YES_OPTION;
+        if (busy) {
+            exit = JOptionPane.showConfirmDialog(this,
+                    "Conversion jobs are in progress. Do you want to quit?",
+                    "Quit?",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+        }
+        if (exit == JOptionPane.YES_OPTION) {
+            if (quitResponse != null) {
+                quitResponse.performQuit();
+            } else {
+                System.exit(0);
+            }
+        } else {
+            if (quitResponse != null) {
+                quitResponse.cancelQuit();
+            }
+        }
     }
 
     private void mnuAddJob() {
@@ -169,11 +190,6 @@ public class MainWindow extends JFrame {
     private void mnuClear() {
         listModel.clear();
     }
-
-    private void thisWindowClosing() {
-        JOptionPane.showMessageDialog(this, "Closing", "Closing", JOptionPane.INFORMATION_MESSAGE);
-    }
-
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -202,12 +218,6 @@ public class MainWindow extends JFrame {
             @Override
             public void componentResized(ComponentEvent e) {
                 thisComponentResized();
-            }
-        });
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                thisWindowClosing();
             }
         });
         var contentPane = getContentPane();

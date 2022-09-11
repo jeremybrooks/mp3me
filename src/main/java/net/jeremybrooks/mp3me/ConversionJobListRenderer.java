@@ -20,18 +20,18 @@ import java.util.List;
  * @author Jeremy Brooks
  */
 public class ConversionJobListRenderer extends JPanel implements ListCellRenderer<ConversionJob> {
-    private static final ImageIcon ICON_PENDING = new ImageIcon(ConversionJobListRenderer.class.getResource("/ClockN.png"));
-    private static final ImageIcon ICON_DONE = new ImageIcon(ConversionJobListRenderer.class.getResource("/GreenCheck.png"));
-    private static final ImageIcon ICON_ERROR = new ImageIcon(ConversionJobListRenderer.class.getResource("/Error.png"));
+    private static final ImageIcon ICON_PENDING = new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/ClockN.png"));
+    private static final ImageIcon ICON_DONE = new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/GreenCheck.png"));
+    private static final ImageIcon ICON_ERROR = new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/Error.png"));
     private static final List<ImageIcon> ICON_CLOCK = List.of(
-            new ImageIcon(ConversionJobListRenderer.class.getResource("/ClockN.png")),
-            new ImageIcon(ConversionJobListRenderer.class.getResource("/ClockNE.png")),
-            new ImageIcon(ConversionJobListRenderer.class.getResource("/ClockE.png")),
-            new ImageIcon(ConversionJobListRenderer.class.getResource("/ClockSE.png")),
-            new ImageIcon(ConversionJobListRenderer.class.getResource("/ClockS.png")),
-            new ImageIcon(ConversionJobListRenderer.class.getResource("/ClockSW.png")),
-            new ImageIcon(ConversionJobListRenderer.class.getResource("/ClockW.png")),
-            new ImageIcon(ConversionJobListRenderer.class.getResource("/ClockNW.png"))
+            new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/ClockN.png")),
+            new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/ClockNE.png")),
+            new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/ClockE.png")),
+            new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/ClockSE.png")),
+            new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/ClockS.png")),
+            new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/ClockSW.png")),
+            new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/ClockW.png")),
+            new ImageIcon(ConversionJobListRenderer.class.getResource("/icons/ClockNW.png"))
     );
     public ConversionJobListRenderer() {
         initComponents();
@@ -88,7 +88,7 @@ public class ConversionJobListRenderer extends JPanel implements ListCellRendere
         ((GridBagLayout)getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};
 
         //---- lblIcon ----
-        lblIcon.setIcon(new ImageIcon(getClass().getResource("/ClockN.png")));
+        lblIcon.setIcon(new ImageIcon(getClass().getResource("/icons/ClockN.png")));
         add(lblIcon, new GridBagConstraints(0, 0, 1, 2, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 5), 0, 0));

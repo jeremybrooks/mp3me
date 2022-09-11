@@ -8,8 +8,7 @@ public class MacOSSetup {
         Desktop.getDesktop().setAboutHandler(ae -> new AboutDialog(MainWindow.getMainWindow()).setVisible(true));
 
         Desktop.getDesktop().setQuitHandler((qe, qr) -> {
-            // todo make the user confirm if busy
-            System.exit(0);
+            MainWindow.getMainWindow().confirmAndExit(qr);
         });
 
         Desktop.getDesktop().setPreferencesHandler(pe -> new SettingsDialog(MainWindow.getMainWindow()).setVisible(true));

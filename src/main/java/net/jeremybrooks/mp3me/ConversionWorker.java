@@ -44,7 +44,7 @@ public class ConversionWorker extends SwingWorker<Void, Integer> {
                 publish(i);
 
             } catch (Exception e) {
-                // todo
+                logger.error("Error during conversion job", e);
             }
             mainWindow.buttonsEnabled(true);
         }
