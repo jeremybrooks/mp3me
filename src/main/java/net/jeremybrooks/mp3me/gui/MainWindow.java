@@ -170,7 +170,9 @@ public class MainWindow extends JFrame {
                     JOptionPane.QUESTION_MESSAGE);
         }
         if (exit == JOptionPane.YES_OPTION) {
-            conversionWorker.killRunningJob();
+            if (conversionWorker != null) {
+                conversionWorker.killRunningJob();
+            }
             if (quitResponse != null) {
                 quitResponse.performQuit();
             } else {

@@ -56,7 +56,9 @@ public class ConversionWorker extends SwingWorker<Void, Integer> {
     }
 
     public void killRunningJob() {
-        fileWalker.killRunningJob();
+        if (fileWalker != null) {
+            fileWalker.killRunningJob();
+        }
     }
 
     /**
