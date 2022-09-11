@@ -56,8 +56,12 @@ public class FileWalker extends SimpleFileVisitor<Path> {
                 case "Copy" -> {
                     job.setMessage("Copying " + file);
                     conversionWorker.jobUpdated(index);
-                    Path dest = Paths.get(file.toString().replaceFirst(job.getSourcePath().toString(), settings.getDestination()));
+                    MediaMetadata metadata = parseMetadata(file.toString());
                     try {
+                    createDirectories(metadata);
+                    Path dest = Paths.get(settings.getDestination(), getArtistDirectory(metadata),
+                            getAlbumDirectory(metadata), file.getFileName().toString());
+//                    Path dest = Paths.get(file.toString().replaceFirst(job.getSourcePath().toString(), settings.getDestination()));
                         Files.copy(file, dest, StandardCopyOption.REPLACE_EXISTING);
                         increment(extension);
                     } catch (Exception e) {
@@ -70,7 +74,7 @@ public class FileWalker extends SimpleFileVisitor<Path> {
                     job.setMessage("Converting " + file);
                     conversionWorker.jobUpdated(index);
                     try {
-                        MediaMetadata metadata = FFProbe.getMediaMetadata(file.toString());
+                        MediaMetadata metadata = parseMetadata(file.toString());
                         createDirectories(metadata);
                         String mp3File = buildUniqueFilename(metadata);
                         logger.info("Converting {} to {}", file, mp3File);
@@ -147,23 +151,32 @@ public class FileWalker extends SimpleFileVisitor<Path> {
         }
     }
 
+    private MediaMetadata parseMetadata(String file) {
+        MediaMetadata metadata;
+        try {
+            metadata = FFProbe.getMediaMetadata(file);
+        } catch (Exception e) {
+            metadata = null;
+        }
+        return metadata;
+    }
+
     private String buildUniqueFilename(MediaMetadata metadata) {
-        String artistDirectory = getArtistDirectory(metadata);
-        String albumDirectory = getAlbumDirectory(metadata);
-        String title = getTitle(metadata);
-        String mp3File = String.format("%s/%s/%s/%02d-%s.mp3",
+        String mp3File = String.format("%s/%s/%s/%02d-%02d-%s.mp3",
                 settings.getDestination(),
-                artistDirectory,
-                albumDirectory,
-                metadata.getTrackNumber(),
-                title);
+                getArtistDirectory(metadata),
+                getAlbumDirectory(metadata),
+                getDiscNumber(metadata),
+                getTrackNumber(metadata),
+                getTitle(metadata));
         if (Files.exists(Paths.get(mp3File))) {
-            mp3File = String.format("%s/%s/%s/%02d-%s-%d.mp3",
+            mp3File = String.format("%s/%s/%s/%02d-%02d-%s-%d.mp3",
                     settings.getDestination(),
-                    artistDirectory,
-                    albumDirectory,
-                    metadata.getTrackNumber(),
-                    title,
+                    getArtistDirectory(metadata),
+                    getAlbumDirectory(metadata),
+                    getDiscNumber(metadata),
+                    getTrackNumber(metadata),
+                    getTitle(metadata),
                     System.currentTimeMillis());
         }
         return mp3File;
@@ -171,36 +184,58 @@ public class FileWalker extends SimpleFileVisitor<Path> {
 
     private String getArtistDirectory(MediaMetadata metadata) {
         String dir;
-        if (metadata.isCompilation()) {
-            dir = "Various Artists";
+        if (metadata == null) {
+            dir = "Unknown Artist";
         } else {
-            if (metadata.getAlbumArtist().isEmpty()) {
-                if (metadata.getArtist().isEmpty()) {
-                    dir = "Unknown Artist";
-                } else {
-                    dir = metadata.getArtist();
-                }
+            if (metadata.isCompilation()) {
+                dir = "Various Artists";
             } else {
-                dir = metadata.getAlbumArtist();
+                if (metadata.getAlbumArtist().isEmpty()) {
+                    if (metadata.getArtist().isEmpty()) {
+                        dir = "Unknown Artist";
+                    } else {
+                        dir = metadata.getArtist();
+                    }
+                } else {
+                    dir = metadata.getAlbumArtist();
+                }
             }
         }
         return sanitizeFilename(dir);
     }
 
     private String getAlbumDirectory(MediaMetadata metadata) {
-        String dir = metadata.getAlbum();
-        if (dir.isEmpty()) {
+        String dir;
+        if (metadata == null) {
             dir = "Unknown Album";
+        } else {
+            dir = metadata.getAlbum();
+            if (dir.isEmpty()) {
+                dir = "Unknown Album";
+            }
         }
         return sanitizeFilename(dir);
     }
 
     private String getTitle(MediaMetadata metadata) {
-        String title = metadata.getTitle();
-        if (title.isEmpty()) {
+        String title;
+        if (metadata == null) {
             title = "Unknown Title";
+        } else {
+            title = metadata.getTitle();
+            if (title.isEmpty()) {
+                title = "Unknown Title";
+            }
         }
         return sanitizeFilename(title);
+    }
+
+    private int getDiscNumber(MediaMetadata metadata) {
+        return metadata == null ? 0 : metadata.getDiscNumber();
+    }
+
+    private int getTrackNumber(MediaMetadata metadata) {
+        return metadata == null ? 0 : metadata.getTrackNumber();
     }
 
     /*
