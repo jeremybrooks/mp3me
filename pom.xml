@@ -6,7 +6,7 @@
 
     <groupId>net.jeremybrooks</groupId>
     <artifactId>mp3me</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>mp3me</name>
     <url>https://jeremybrooks.net/mp3me</url>
