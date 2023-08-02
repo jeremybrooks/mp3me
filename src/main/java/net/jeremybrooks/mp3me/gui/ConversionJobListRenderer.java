@@ -75,7 +75,11 @@ public class ConversionJobListRenderer extends JPanel implements ListCellRendere
             setBackground(Color.YELLOW);
             setForeground(Color.WHITE);
         } else {
-            setBackground(Color.WHITE);
+            if ((index & 1) == 0) {
+                setBackground(Color.WHITE);
+            } else {
+                setBackground(Color.LIGHT_GRAY);
+            }
             setForeground(Color.BLACK);
         }
         return this;
