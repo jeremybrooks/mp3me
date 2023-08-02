@@ -61,7 +61,6 @@ public class FileWalker extends SimpleFileVisitor<Path> {
                     createDirectories(metadata);
                     Path dest = Paths.get(settings.getDestination(), getArtistDirectory(metadata),
                             getAlbumDirectory(metadata), file.getFileName().toString());
-//                    Path dest = Paths.get(file.toString().replaceFirst(job.getSourcePath().toString(), settings.getDestination()));
                         Files.copy(file, dest, StandardCopyOption.REPLACE_EXISTING);
                         increment(extension);
                     } catch (Exception e) {
@@ -201,7 +200,7 @@ public class FileWalker extends SimpleFileVisitor<Path> {
                 }
             }
         }
-        return sanitizeFilename(dir);
+        return FilenameSanitizer.sanitizeFilename(dir);
     }
 
     private String getAlbumDirectory(MediaMetadata metadata) {
@@ -214,7 +213,7 @@ public class FileWalker extends SimpleFileVisitor<Path> {
                 dir = "Unknown Album";
             }
         }
-        return sanitizeFilename(dir);
+        return FilenameSanitizer.sanitizeFilename(dir);
     }
 
     private String getTitle(MediaMetadata metadata) {
@@ -227,7 +226,7 @@ public class FileWalker extends SimpleFileVisitor<Path> {
                 title = "Unknown Title";
             }
         }
-        return sanitizeFilename(title);
+        return FilenameSanitizer.sanitizeFilename(title);
     }
 
     private int getDiscNumber(MediaMetadata metadata) {
@@ -237,13 +236,4 @@ public class FileWalker extends SimpleFileVisitor<Path> {
     private int getTrackNumber(MediaMetadata metadata) {
         return metadata == null ? 0 : metadata.getTrackNumber();
     }
-
-    /*
-     * Leave numbers, letters, dot, and underscore;
-     * replace everything else with an underscore.
-     */
-    private String sanitizeFilename(String inputName) {
-        return inputName.replaceAll("[^a-zA-Z0-9-_\\.]", "_");
-    }
-
 }

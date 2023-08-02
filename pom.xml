@@ -18,7 +18,7 @@
 
         <log4j.version>2.18.0</log4j.version>
         <pressplay.version>1.0.7</pressplay.version>
-        <junit.version>4.13.2</junit.version>
+        <junit.version>5.10.0</junit.version>
     </properties>
 
     <dependencies>
@@ -33,8 +33,8 @@
             <version>${pressplay.version}</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
