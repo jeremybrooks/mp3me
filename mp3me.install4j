@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install4j version="10.0.1" transformSequenceNumber="10">
+<install4j version="10.0.6" transformSequenceNumber="10">
   <directoryPresets config="${project.basedir}/target/{$project.artifactId}-{$project.version}.jar" />
   <application name="${project.artifactId}" applicationId="2071-0457-7136-8710" mediaDir="${project.basedir}/target/media" shortName="${project.artifactId}" publisher="Jeremy Brooks" publisherWeb="https://jeremybrooks.net" version="${project.version}" allPathsRelative="true" macVolumeId="29a5a7d290d126be">
     <codeSigning macEnabled="true" macPkcs12File="${project.basedir}/../DeveloperIdApplication.p12" macNotarize="true" appleId="jeremybrooks@me.com" />
-    <jreBundles jdkProviderId="Zulu" release="17/latest" />
+    <jreBundles jdkProviderId="Zulu" release="19/latest" />
   </application>
   <files>
     <mountPoints>

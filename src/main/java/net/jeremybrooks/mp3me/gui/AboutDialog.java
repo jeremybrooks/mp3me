@@ -17,10 +17,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
+import java.io.InputStream;
 import java.io.Serial;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 /**
@@ -42,12 +40,11 @@ public class AboutDialog extends JDialog {
 
     private String readLicense() {
         String license;
-        try {
-            URL url = AboutDialog.class.getResource("/LICENSE");
-            if (url == null) {
+        try (InputStream in = AboutDialog.class.getResourceAsStream("/LICENSE")) {
+            if (in == null) {
                 license = "GNU GPLv3";
             } else {
-                license = Files.readString(Paths.get(url.toURI()));
+                license = new String(in.readAllBytes());
             }
         } catch (Exception e) {
             license = "GNU GPLv3";
@@ -90,6 +87,8 @@ public class AboutDialog extends JDialog {
                     txtAbout.setText("A utility to convert audio files to mp3. \n\nTo use mp3me, you must have ffmpeg installed. By default, mp3me will look for ffmpeg at /usr/local/bin/ffmpeg. If you have it installed in a different location, open the Preferences dialog and set the correct location. \n\nCoding: Jeremy Brooks\nSource Code: https://github.com/jeremybrooks/mp3me\nLibraries:\n    Log4j (https://logging.apache.org/log4j/2.x/)\n    pressplay (https://github.com/jeremybrooks/pressplay)\n\nInstaller built using Install4j (https://www.ej-technologies.com/products/install4j/overview.html)");
                     txtAbout.setWrapStyleWord(true);
                     txtAbout.setLineWrap(true);
+                    txtAbout.setText(txtAbout.getText() +
+                            "\n\nJava version: " + System.getProperty("java.version") + "\n\nJava home: " + System.getProperty("java.home"));
                     scrollPane2.setViewportView(txtAbout);
                 }
                 tabbedPane1.addTab(bundle.getString("AboutDialog.scrollPane2.tab.title"), scrollPane2);

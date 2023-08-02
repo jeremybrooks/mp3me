@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.7.0.1134" Java: "17.0.3" encoding: "UTF-8"
+JFDML JFormDesigner: "8.1.0.0.283" Java: "17.0.7" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.autoExternalize": true
@@ -28,6 +28,9 @@ new FormModel {
 							"text": "A utility to convert audio files to mp3. \n\nTo use mp3me, you must have ffmpeg installed. By default, mp3me will look for ffmpeg at /usr/local/bin/ffmpeg. If you have it installed in a different location, open the Preferences dialog and set the correct location. \n\nCoding: Jeremy Brooks\nSource Code: https://github.com/jeremybrooks/mp3me\nLibraries:\n    Log4j (https://logging.apache.org/log4j/2.x/)\n    pressplay (https://github.com/jeremybrooks/pressplay)\n\nInstaller built using Install4j (https://www.ej-technologies.com/products/install4j/overview.html)"
 							"wrapStyleWord": true
 							"lineWrap": true
+							auxiliary() {
+								"JavaCodeGenerator.postInitCode": "txtAbout.setText(txtAbout.getText() +\n        \"\\n\\nJava version: \" + System.getProperty(\"java.version\") + \"\\n\\nJava home: \" + System.getProperty(\"java.home\"));\n"
+							}
 						} )
 					}, new FormLayoutConstraints( null ) {
 						"title": new FormMessage( null, "AboutDialog.scrollPane2.tab.title" )
