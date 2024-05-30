@@ -5,34 +5,18 @@
 package net.jeremybrooks.mp3me.gui;
 
 import net.jeremybrooks.mp3me.App;
-import net.jeremybrooks.mp3me.model.ConversionJob;
 import net.jeremybrooks.mp3me.ConversionWorker;
 import net.jeremybrooks.mp3me.FileCounter;
 import net.jeremybrooks.mp3me.FileDrop;
+import net.jeremybrooks.mp3me.model.ConversionJob;
 import net.jeremybrooks.mp3me.model.Settings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.desktop.QuitResponse;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -40,11 +24,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serial;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * @author Jeremy Brooks
@@ -116,16 +98,24 @@ public class MainWindow extends JFrame {
     }
 
     private void btnGo() {
+        Settings settings = App.getSettings();
         if (listModel.size() == 0) {
             JOptionPane.showMessageDialog(this, "No conversion jobs in list.", "No Jobs",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (App.getSettings().getDestination().length() == 0) {
+        } else if (settings.getDestination().length() == 0) {
             JOptionPane.showMessageDialog(this,
                     "No destination selected.\nPlease specify a destination in Preferences.",
                     "No Destination",
                     JOptionPane.ERROR_MESSAGE);
-
+        } else if (!Files.exists(Paths.get(Paths.get(settings.getFfmpegBinary()).getParent().toString(), "ffmpeg")) ||
+                !Files.exists(Paths.get(Paths.get(settings.getFfmpegBinary()).getParent().toString(), "ffprobe"))) {
+            JOptionPane.showMessageDialog(this,
+                    "Could not find ffmpeg binaries at " + settings.getFfmpegBinary() + ".\n" +
+                            "Please specify the ffmpeg location in Preferences.",
+                    "No ffmpeg",
+                    JOptionPane.ERROR_MESSAGE);
         } else {
+            System.setProperty("pressplay.ffmpeg.path", Paths.get(settings.getFfmpegBinary()).getParent().toString());
             buttonsEnabled(false);
             List<ConversionJob> list = Collections.list(listModel.elements());
             conversionWorker = new ConversionWorker(list, Long.MAX_VALUE, this);
@@ -229,6 +219,7 @@ public class MainWindow extends JFrame {
             public void componentMoved(ComponentEvent e) {
                 thisComponentMoved();
             }
+
             @Override
             public void componentResized(ComponentEvent e) {
                 thisComponentResized();
@@ -236,10 +227,10 @@ public class MainWindow extends JFrame {
         });
         var contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
-        ((GridBagLayout)contentPane.getLayout()).columnWidths = new int[] {0, 0, 0};
-        ((GridBagLayout)contentPane.getLayout()).rowHeights = new int[] {0, 0, 0};
-        ((GridBagLayout)contentPane.getLayout()).columnWeights = new double[] {0.0, 0.0, 1.0E-4};
-        ((GridBagLayout)contentPane.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};
+        ((GridBagLayout) contentPane.getLayout()).columnWidths = new int[]{0, 0, 0};
+        ((GridBagLayout) contentPane.getLayout()).rowHeights = new int[]{0, 0, 0};
+        ((GridBagLayout) contentPane.getLayout()).columnWeights = new double[]{0.0, 0.0, 1.0E-4};
+        ((GridBagLayout) contentPane.getLayout()).rowWeights = new double[]{0.0, 0.0, 1.0E-4};
         setTitle(String.format("%s - %s", App.appName, App.version));
 
         //======== menuBar1 ========
@@ -266,9 +257,13 @@ public class MainWindow extends JFrame {
                 mnuJobs.setText(bundle.getString("MainWindow.mnuJobs.text"));
                 mnuJobs.addMenuListener(new MenuListener() {
                     @Override
-                    public void menuCanceled(MenuEvent e) {}
+                    public void menuCanceled(MenuEvent e) {
+                    }
+
                     @Override
-                    public void menuDeselected(MenuEvent e) {}
+                    public void menuDeselected(MenuEvent e) {
+                    }
+
                     @Override
                     public void menuSelected(MenuEvent e) {
                         mnuJobsMenuSelected();
@@ -297,8 +292,8 @@ public class MainWindow extends JFrame {
         //---- label1 ----
         label1.setText(bundle.getString("MainWindow.label1.text"));
         contentPane.add(label1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-            GridBagConstraints.NORTHEAST, GridBagConstraints.NONE,
-            new Insets(3, 3, 8, 8), 0, 0));
+                GridBagConstraints.NORTHEAST, GridBagConstraints.NONE,
+                new Insets(3, 3, 8, 8), 0, 0));
 
         //======== scrollPane1 ========
         {
@@ -308,8 +303,8 @@ public class MainWindow extends JFrame {
             scrollPane1.setViewportView(list1);
         }
         contentPane.add(scrollPane1, new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(5, 3, 10, 3), 0, 0));
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(5, 3, 10, 3), 0, 0));
 
         //======== panel3 ========
         {
@@ -321,8 +316,8 @@ public class MainWindow extends JFrame {
             panel3.add(btnGo);
         }
         contentPane.add(panel3, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
-            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-            new Insets(0, 0, 0, 0), 0, 0));
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 0, 0), 0, 0));
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
