@@ -6,17 +6,17 @@
 
     <groupId>net.jeremybrooks</groupId>
     <artifactId>mp3me</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.3</version>
 
     <name>mp3me</name>
     <url>https://jeremybrooks.net/mp3me</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
 
-        <log4j.version>2.18.0</log4j.version>
+        <log4j.version>2.23.1</log4j.version>
         <pressplay.version>1.0.7</pressplay.version>
         <junit.version>5.10.0</junit.version>
     </properties>
