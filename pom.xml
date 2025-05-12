@@ -6,7 +6,7 @@
 
     <groupId>net.jeremybrooks</groupId>
     <artifactId>mp3me</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
 
     <name>mp3me</name>
     <url>https://jeremybrooks.net/mp3me</url>
@@ -16,9 +16,13 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
 
-        <log4j.version>2.23.1</log4j.version>
-        <pressplay.version>1.0.7</pressplay.version>
+        <log4j.version>2.24.3</log4j.version>
+        <pressplay.version>1.0.9</pressplay.version>
         <junit.version>5.10.0</junit.version>
+        <!-- plugin versions -->
+        <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+        <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
+        <install4j-maven.version>11.0.3</install4j-maven.version>
     </properties>
 
     <dependencies>
@@ -39,7 +43,12 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
+    <pluginRepositories>
+        <pluginRepository>
+            <id>ej-technologies</id>
+            <url>https://maven.ej-technologies.com/repository</url>
+        </pluginRepository>
+    </pluginRepositories>
     <build>
         <resources>
             <resource>
@@ -64,7 +73,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>${maven-jar-plugin.version}</version>
                 <inherited>true</inherited>
                 <configuration>
                     <excludes>
@@ -81,7 +90,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>${maven-dependency-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -96,9 +105,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.sonatype.install4j</groupId>
-                <artifactId>install4j-maven-plugin</artifactId>
-                <version>1.1.2</version>
+                <groupId>com.install4j</groupId>
+                <artifactId>install4j-maven</artifactId>
+                <version>${install4j-maven.version}</version>
                 <executions>
                     <execution>
                         <id>compile-installers</id>

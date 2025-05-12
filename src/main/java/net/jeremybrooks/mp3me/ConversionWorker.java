@@ -29,7 +29,7 @@ public class ConversionWorker extends SwingWorker<Void, Integer> {
     @Override
     protected Void doInBackground() throws Exception {
         logger.info("set working");
-        ConversionJob job = null;
+        ConversionJob job;
         for (int i = 0; i < jobList.size(); i++) {
             try {
                 // mark the job as active, and start a timer to update the clock animation

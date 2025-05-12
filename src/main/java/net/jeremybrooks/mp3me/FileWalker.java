@@ -59,9 +59,9 @@ public class FileWalker extends SimpleFileVisitor<Path> {
                     MediaMetadata metadata = parseMetadata(file.toString());
                     try {
                     createDirectories(metadata);
-                    Path dest = Paths.get(settings.getDestination(), getArtistDirectory(metadata),
+                    Path destination = Paths.get(settings.getDestination(), getArtistDirectory(metadata),
                             getAlbumDirectory(metadata), file.getFileName().toString());
-                        Files.copy(file, dest, StandardCopyOption.REPLACE_EXISTING);
+                        Files.copy(file, destination, StandardCopyOption.REPLACE_EXISTING);
                         increment(extension);
                     } catch (Exception e) {
                         logger.error("Copy failed for file {}", file, e);

@@ -15,6 +15,6 @@ public class FilenameSanitizer {
         }
         String newName = Normalizer.normalize(inputName, Normalizer.Form.NFKD)
                 .replaceAll("\\p{M}", "");
-        return newName.replaceAll("[^a-zA-Z0-9-_\\.]", "_");
+        return newName.replaceAll("[^a-zA-Z0-9-_.]", "_");
     }
 }
